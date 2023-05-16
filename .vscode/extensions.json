@@ -1,4 +1,9 @@
 {
-  "recommendations": ["dbaeumer.vscode-eslint", "unifiedjs.vscode-mdx"],
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "unifiedjs.vscode-mdx",
+    "johnreemar.vscode-qwik-snippets",
+    "Raiondesu.qwik-city-link-autocomplete"
+  ],
   "unwantedRecommendations": []
 }
