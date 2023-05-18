@@ -2,7 +2,7 @@
 
 This project is my first project in Qwik, and I am using it as a learning opportunity.
 
-
+![Alt text](docs/qwik-app.png)
 ## Techs
 - [Qwik Docs](https://qwik.builder.io/)
 - [Discord](https://qwik.builder.io/chat)
