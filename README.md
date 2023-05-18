@@ -1,5 +1,9 @@
-# Qwik City App ⚡️
+# Qwik Poke ⚡️
 
+This project is my first project in Qwik, and I am using it as a learning opportunity.
+
+
+## Techs
 - [Qwik Docs](https://qwik.builder.io/)
 - [Discord](https://qwik.builder.io/chat)
 - [Qwik GitHub](https://github.com/BuilderIO/qwik)
