@@ -1,0 +1,5 @@
+{
+  "css.lint.unknownAtRules": "ignore",
+  "workbench.iconTheme": "material-icon-theme",
+  "material-icon-theme.activeIconPack": "qwik",
+}

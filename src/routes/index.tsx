@@ -5,11 +5,13 @@ import Counter from '~/components/starter/counter/counter';
 import Hero from '~/components/starter/hero/hero';
 import Infobox from '~/components/starter/infobox/infobox';
 import Starter from '~/components/starter/next-steps/next-steps';
+import PokeIndex from './poke-index'; './poke-index';
 
 export default component$(() => {
   return (
     <>
-      <Hero />
+      <PokeIndex></PokeIndex>
+      {/* <Hero />
       <Starter />
 
       <div role="presentation" class="ellipsis"></div>
@@ -21,11 +23,11 @@ export default component$(() => {
           <br /> on me
         </h3>
         <Counter />
-      </div>
+      </div> */}
 
-      <div class="container container-flex">
+      {/* <div class="container container-flex">
         <Infobox>
-          <div q:slot="title" class="icon icon-cli">
+          <div q: slot="title" class="icon icon-cli">
             CLI Commands
           </div>
           <>
@@ -54,7 +56,7 @@ export default component$(() => {
 
         <div>
           <Infobox>
-            <div q:slot="title" class="icon icon-apps">
+            <div q: slot="title" class="icon icon-apps">
               Example Apps
             </div>
             <p>
@@ -64,7 +66,7 @@ export default component$(() => {
           </Infobox>
 
           <Infobox>
-            <div q:slot="title" class="icon icon-community">
+            <div q: slot="title" class="icon icon-community">
               Community
             </div>
             <ul>
@@ -96,13 +98,13 @@ export default component$(() => {
             </ul>
           </Infobox>
         </div>
-      </div>
+      </div> */}
     </>
   );
 });
 
 export const head: DocumentHead = {
-  title: 'Welcome to Qwik',
+  title: 'Poke Qwik',
   meta: [
     {
       name: 'description',
