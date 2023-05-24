@@ -1,8 +1,10 @@
 # Qwik Poke ⚡️
 
 This project is my first project in Qwik, and I am using it as a learning opportunity.
-
 ![Alt text](docs/qwik-app.png)
+
+This project load list from server (SSR)
+![Alt text](docs/list-ssr.png)
 ## Techs
 - [Qwik Docs](https://qwik.builder.io/)
 - [Discord](https://qwik.builder.io/chat)
