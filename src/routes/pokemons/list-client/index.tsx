@@ -1,32 +1,40 @@
-import { $, component$, useOnDocument, useStore, useTask$ } from '@builder.io/qwik';
+import { $, component$, useContext, useOnDocument, useTask$ } from '@builder.io/qwik';
 import type { DocumentHead, } from '@builder.io/qwik-city'
 import { PokemonImage } from '~/components/pokemons/pokemon-image';
+import { PokemonListContext } from '~/context';
 import { getSmallPokemons } from '~/helpers/get-small-pokemons';
-import type { SmallPokemon } from '~/interfaces';
 
+/*
+    * v1.0 
 interface PokemonPageState {
     currentPage: number;
     isLoading: boolean;
     pokemons: SmallPokemon[];
-}
-
+}*/
 
 export default component$(() => {
 
+    /*
+    * v1.0 
     const pokemonState = useStore<PokemonPageState>({
         currentPage: 0,
         isLoading: false,
         pokemons: [],
-    });
+    });*/
 
-    // Solo el client
-    // useVisibleTask$( async({ track }) => {
-    //   track( () => pokemonState.currentPage );
+    // V2.0 using context
+    const pokemonState = useContext(PokemonListContext);
 
-    //   const pokemons = await getSmallPokemons( pokemonState.currentPage * 10 );
-    //   pokemonState.pokemons = [ ...pokemonState.pokemons,  ...pokemons];
-    // });
+    /*
+    * Solo el client
+    useVisibleTask$( async({ track }) => {
+        track( () => pokemonState.currentPage );
+       const pokemons = await getSmallPokemons( pokemonState.currentPage * 10 );
+    });*/
 
+    /*
+    * Primero en el server y luego en el cliente
+    */
     useTask$(async ({ track }) => {
         track(() => pokemonState.currentPage);
 
@@ -65,9 +73,9 @@ export default component$(() => {
 
             <div class="grid sm:grid-cols-2 md:grid-cols-5 xl:grid-cols-7 mt-5">
                 {
-                    pokemonState.pokemons.map(({ name, id }) => (
-                        <div key={name} class="m-5 flex flex-col justify-center items-center">
-                            <PokemonImage id={id} isVisible/>
+                    pokemonState.pokemons.map(({ name, id }, index) => (
+                        <div key={index} class="m-5 flex flex-col justify-center items-center">
+                            <PokemonImage id={id} isVisible />
                             <span class="capitalize">{name}</span>
                         </div>
                     ))
