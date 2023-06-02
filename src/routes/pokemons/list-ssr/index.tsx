@@ -1,9 +1,9 @@
-import { component$, useComputed$ } from '@builder.io/qwik';
+import { component$, useComputed$, useSignal, useStore, $ } from '@builder.io/qwik';
 import { Link, type DocumentHead, routeLoader$, useLocation } from '@builder.io/qwik-city';
 import { PokemonImage } from '~/components/pokemons/pokemon-image';
+import { Modal } from '~/components/shared/modal/modal';
 import { getSmallPokemons } from '~/helpers/get-small-pokemons';
 import type { SmallPokemon } from '~/interfaces';
-
 
 export const usePokemonList = routeLoader$<SmallPokemon[]>(async ({ query, redirect, pathname }) => {
 
@@ -16,7 +16,41 @@ export const usePokemonList = routeLoader$<SmallPokemon[]>(async ({ query, redir
 
 export default component$(() => {
    const pokemons = usePokemonList();
-   const location = useLocation()
+   const location = useLocation();
+   const modalVisible = useSignal(true);
+
+   const modalPokemon = useStore({
+      id: '',
+      name: ''
+   });
+
+   
+   // Modal functions
+   const showModal = $((id: string, name: string) => {
+      modalPokemon.id = id;
+      modalPokemon.name = name;
+
+      modalVisible.value = true;
+   });
+   const closeModal = $(() => {
+      modalVisible.value = false;
+   });
+
+   /*
+   * request information from ChatGPT
+   const chatGptPokemonFact = useSignal('');
+
+   useVisibleTask$(({ track }) => {
+      track(() => modalPokemon.name);
+
+      chatGptPokemonFact.value = '';
+
+      if (modalPokemon.name.length > 0) {
+         getFunFactAboutPokemon(modalPokemon.name)
+            .then(resp => chatGptPokemonFact.value = resp);
+      }
+   });*/
+
 
    const currentOffset = useComputed$<number>(() => {
       // const offsetString = location.url.searchParams.get('offset');
@@ -46,7 +80,9 @@ export default component$(() => {
          <div class="grid grid-cols-6 mt-5">
             {
                pokemons.value.map(({ name, id }) => (
-                  <div key={name} class="m-5 flex flex-col justify-center items-center">
+                  <div key={name}
+                     onClick$={() => showModal(id, name)}
+                     class="m-5 flex flex-col justify-center items-center">
                      <PokemonImage id={id} isVisible />
                      <span class="capitalize">{name}</span>
                   </div>
@@ -54,6 +90,24 @@ export default component$(() => {
             }
 
          </div>
+         <Modal
+            showModal={modalVisible.value}
+            closeFn={closeModal}>
+            <div q: slot='title' class="text-3xl text-purple-800">
+               {modalPokemon.name}
+            </div>
+
+            <div q: slot='content' class="flex flex-col justify-center items-center">
+               <PokemonImage id={modalPokemon.id} isVisible />
+               {/* <span>
+                  {
+                     chatGptPokemonFact.value === ''
+                        ? 'Preguntando a ChatGPT'
+                        : chatGptPokemonFact
+                  }
+               </span> */}
+            </div>
+         </Modal>
       </>
    );
 });
