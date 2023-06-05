@@ -17,7 +17,7 @@ export const usePokemonList = routeLoader$<SmallPokemon[]>(async ({ query, redir
 export default component$(() => {
    const pokemons = usePokemonList();
    const location = useLocation();
-   const modalVisible = useSignal(true);
+   const modalVisible = useSignal(false);
 
    const modalPokemon = useStore({
       id: '',
